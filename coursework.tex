@@ -1,0 +1,95 @@
+%----------------------------------------------------------------------------------------
+%   PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage{fancyvrb}
+\usepackage{array}
+\usepackage{relsize}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage[colorinlistoftodos]{todonotes}
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+\newcommand{\shortrnote}[1]{ &  & \text{\footnotesize\llap{#1}}}
+
+%----------------------------------------------------------------------------------------
+%   HEADING
+%----------------------------------------------------------------------------------------
+
+\newcommand{\BigO}[1]{\ensuremath{\operatorname{O}\left(#1\right)}}
+
+\title{\textsc{Computational Finance}\\Coursework}
+\author{Lawrence Jones \{lmj112\}}
+
+\date{}
+\begin{document}
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%   EXERCISE 1
+%----------------------------------------------------------------------------------------
+
+\subsection*{Exercise 1. Dividend Discount Model}
+
+
+Assume that each stock of a company pays a dividend $D_t$ at the end of every
+year, $t = 1, 2, 3, \ldots$, and denote by $r > 0$ the constant annual interest
+rate (use yearly compounding).
+
+\subsubsection*{Part (a)}
+
+Computing the Net Present Value of the dividend stream:
+
+\begin{equation}
+  \mathlarger{\mathlarger{\sum}}_{k=1}^{\infty}
+    \frac{(1 + g)^{k}~D_{0}}{(1+r)^{k}}
+\end{equation}
+\
+where:
+
+\begin{conditions}
+    D_{0}           & Initial dividend amount \\
+    g               & Dividend growth rate \\
+    r               & Constant annual interest rate
+\end{conditions}
+
+% Remove D0 from summation
+\begin{flalign}
+  && &= D_{0} \left(
+    \mathlarger{\mathlarger{\sum}}_{k=1}^{\infty}
+      \frac{(1 + g)^{k}}{(1+r)^{k}}
+    \right) \shortrnote{Extract $D_{0}$} \\
+\
+  && &= D_{0} \left(
+    \mathlarger{\mathlarger{\sum}}_{k=0}^{\infty}
+      \frac{(1 + g)^{k}}{(1+r)^{k}}
+      -
+    1
+  \right) \shortrnote{Extend summation limits} \\
+\
+  && &= D_{0} \left(
+    \frac{1}{1 - \frac{1 + g}{1 + r}}
+      -
+    1
+  \right) \shortrnote{Summation to $\infty$} \\
+\
+  && &= D_{0} \left(
+  \frac{1 + r}{r - g}
+    -
+  \frac{r - g}{r - g}
+  \right) \shortrnote{Multiply by $\frac{1+r}{1+r}$} \\
+\
+  && &= D_{0} \left(
+  \frac{1 + g}{r - g}
+  \right)
+\end{flalign}
+
+\end{document}
