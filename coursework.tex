@@ -15,6 +15,8 @@
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 \usepackage[colorinlistoftodos]{todonotes}
 
+\setlength{\parindent}{0pt}
+
 \newenvironment{conditions}
   {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
   {\end{tabular}\par\vspace{\belowdisplayskip}}
@@ -39,7 +41,6 @@
 
 \subsection*{Exercise 1. Dividend Discount Model}
 
-
 Assume that each stock of a company pays a dividend $D_t$ at the end of every
 year, $t = 1, 2, 3, \ldots$, and denote by $r > 0$ the constant annual interest
 rate (use yearly compounding).
@@ -48,6 +49,7 @@ rate (use yearly compounding).
 
 Computing the Net Present Value of the dividend stream:
 
+\setcounter{equation}{0}
 \begin{equation}
   \mathlarger{\mathlarger{\sum}}_{k=1}^{\infty}
     \frac{(1 + g)^{k}~D_{0}}{(1+r)^{k}}
@@ -91,5 +93,131 @@ where:
   \frac{1 + g}{r - g}
   \right)
 \end{flalign}
+
+\subsubsection*{Part (b)}
+
+Find expression for\dots
+
+\setcounter{equation}{0}
+\begin{eqnarray}
+  & \sum_{t=1}^{\infty} tx^{t} &= x + 2x^{2} + 3x^{3} + \dots \\
+                               &&= \sum_{t=1}^{\infty} \left( \sum_{k=t}^{\infty} x^{k} \right) \\
+                               &&= \sum_{t=1}^{\infty} \left( \frac{x^{t}}{1 - x} \right) \\
+                               &&= \frac{\frac{x}{1 - x}}{1 - x} \\
+                               &&= x\left(1 - x\right)^{-2}
+\end{eqnarray}
+
+The net present value of this dividend stream can be represented as\dots
+
+\begin{eqnarray}
+  & \sum_{t=1}^{\infty} \frac{D_{0} + tI}{\left(1 + r\right)^{t}} \
+  &= \sum_{t=1}^{\infty} \frac{D_{0}}{\left(1+r\right)^{t}} + \sum_{t=1}^{\infty} \frac{tI}{\left(1+r\right)^{t}} \\
+  &&= D_{0}\left( \sum_{t=0}^{\infty} \frac{1}{\left(1+r\right)^{t}} - 1 \right) + \dots \\
+  &&= D_{0}\left( \frac{1}{1 - \left(\frac{1}{1+r}\right)} -1 \right) + \dots \\
+  &&= D_{0}\left( \frac{r+1}{r} -1 \right) + \dots \\
+  &&= \left( \frac{D_{0}}{r} \right) + \sum_{t=1}^{\infty} \frac{tI}{\left(1+r\right)^{t}} \\
+  &&= \dots + I\left( \frac{1}{1+r} \left(1 - \frac{1}{1+r}\right)^{-2} \right) \\
+  &&= \dots + I\left( \frac{1}{1+r} \left( \frac{1}{1 - \frac{1}{1+r}} \right)^{2} \right) \\
+  &&= \dots + I\left( \frac{1+r}{r^{2}} \right) \\
+  &&= \frac{I + r\left(I + D_{0}\right)}{r^{2}}
+\end{eqnarray}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+%   EXERCISE 2
+%----------------------------------------------------------------------------------------
+
+\subsection*{Exercise 2. Fixed Income Securities}
+
+Consider a 10\% coupon bond with a face value of £100 that matures in 2 years
+from now. Assume that there is one coupon payment per year and that the bond is
+absolutely risk free.
+
+\subsubsection*{Part (a)}
+
+The cash flow stream with spot rates is computed in the following table.
+
+\begin{center}
+  \begin{tabular}{| l | l | l | l |}
+    \hline
+    \textbf{Year}           & 1     & 2     & 3      \\ \hline
+    \textbf{Spot Rate}      & 4\%   & 6\%   & 8\%    \\ \hline
+    \textbf{Discount}       & 0.962 & 0.890 & 0.794  \\ \hline
+    \textbf{Cash Flow}      & 10    & 110   & 0      \\ \hline
+    \textbf{Present Value}  & 9.62  & 97.90 & 0      \\ \hline
+  \end{tabular}
+\end{center}
+
+The price of the bond is the sum of the present values\dots
+
+\[\sum_{t=1}^{2} PV_{t} = 9.62 + 97.90 + 0 = £107.52\]
+
+\subsubsection*{Part (b)}
+
+From our definition of Yield to Maturity with yearly coupon payments\dots
+
+\setcounter{equation}{0}
+\begin{equation}
+P = \frac{F}{\left(1 + \lambda\right)^{n}} + \sum_{k=1}^{n} \frac{C}{\left(1 + \lambda\right)^{k}}
+\end{equation}
+\
+where:
+
+\begin{conditions}
+  P               & Bond price (market value) \\
+  F               & Face value \\
+  n               & Years until maturity \\
+  \lambda         & Yield to Maturity \\
+  C               & Coupon amount (coupon rate * face value)
+\end{conditions}
+
+\begin{eqnarray}
+  & P \
+\
+  &= \frac{F}{\left(1 + \lambda\right)^{2}} + \frac{C}{1 + \lambda} + \frac{C}{\left(1 + \lambda\right)^{2}} \\
+  &&= \frac{F + C}{\left(1 + \lambda\right)^{2}} + \frac{C\left(1 + \lambda\right)}{\left(1 + \lambda\right)^{2}} \\
+  &&= \frac{F + 2C + C\lambda}{\left(1 + \lambda\right)^{2}} \\
+\end{eqnarray}
+
+Rearranging for a $\lambda$ quadratic gives\dots
+
+\[P\lambda^{2} + \left(2P - C\right)\lambda + \left(P - F - 2C\right) = 0\]
+
+Using quadratic formula\dots
+
+\begin{eqnarray}
+  & \lambda &= \frac{ -\left(2P - C\right) \pm \sqrt{\left(2P - C\right)^{2} - 4P\left(P - F - 2C\right)} }{2P} \\
+  &&= \frac{ C - 2P \pm \sqrt{C^{2} + 4CP + 4FP} }{2P}
+\end{eqnarray}
+
+For this bond\dots
+
+\[ \lambda = -1.966 \text{~or~} 0.059 \]
+
+Yield is positive, so the yield value is 5.9\%.
+
+\subsubsection*{Part (c)}
+
+Definition of Macaulay duration\dots
+
+\[ D = \frac{PV[t_{0}]t_{0} + \dots + PV[t_{n}]t_{n}}{PV[t_{0}] + \dots + PV[t_{n}]} \]
+\
+where:
+
+\begin{conditions}
+  D               & Macaulay duration \\
+  t_{i}           & Time in years \\
+  PV[t_{i}]       & Present value of cash flow at time $t_{i}$ wrt. yield
+\end{conditions}
+
+So for this bond\dots
+
+\setcounter{equation}{0}
+\begin{eqnarray}
+  & D &= \frac{PV[t_{0}]t_{0} + PV[t_{1}]t_{1} + PV[t_{2}]t_{2}}{PV[t_{0}] + PV[t_{1}] + PV[t_{2}]} \\
+  &&= \frac{0 + 9.44 + 2*98.08}{0 + 9.44 + 98.08} \\
+  &&= \text{1.91 years}
+\end{eqnarray}
 
 \end{document}
