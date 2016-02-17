@@ -52,47 +52,27 @@ Computing the Net Present Value of the dividend stream:
 \setcounter{equation}{0}
 \begin{equation}
   \mathlarger{\mathlarger{\sum}}_{k=1}^{\infty}
-    \frac{(1 + g)^{k}~D_{0}}{(1+r)^{k}}
+    \frac{(1 + g)^{k}~D_{1}}{(1+r)^{k}}
 \end{equation}
 \
 where:
 
 \begin{conditions}
-    D_{0}           & Initial dividend amount \\
+    D_{1}           & Initial dividend amount \\
     g               & Dividend growth rate \\
     r               & Constant annual interest rate
 \end{conditions}
 
-% Remove D0 from summation
-\begin{flalign}
-  && &= D_{0} \left(
-    \mathlarger{\mathlarger{\sum}}_{k=1}^{\infty}
-      \frac{(1 + g)^{k}}{(1+r)^{k}}
-    \right) \shortrnote{Extract $D_{0}$} \\
-\
-  && &= D_{0} \left(
-    \mathlarger{\mathlarger{\sum}}_{k=0}^{\infty}
-      \frac{(1 + g)^{k}}{(1+r)^{k}}
-      -
-    1
-  \right) \shortrnote{Extend summation limits} \\
-\
-  && &= D_{0} \left(
-    \frac{1}{1 - \frac{1 + g}{1 + r}}
-      -
-    1
-  \right) \shortrnote{Summation to $\infty$} \\
-\
-  && &= D_{0} \left(
-  \frac{1 + r}{r - g}
-    -
-  \frac{r - g}{r - g}
-  \right) \shortrnote{Multiply by $\frac{1+r}{1+r}$} \\
-\
-  && &= D_{0} \left(
-  \frac{1 + g}{r - g}
-  \right)
-\end{flalign}
+\setcounter{equation}{0}
+\begin{eqnarray}
+  &&= D_{1}\left(\sum_{k=1}^{\infty} \frac{\left(1+g\right)^{k-1}}{\left(1+r\right)^{k}}\right) \\
+  &&= \frac{D_{1}}{\left(1+g\right)} \left(\sum_{k=1}^{\infty} \frac{\left(1+g\right)^{k}}{\left(1+r\right)^{k}}\right) \\
+  &&= \frac{D_{1}}{\left(1+g\right)} \left(\sum_{k=0}^{\infty} \frac{\left(1+g\right)^{k}}{\left(1+r\right)^{k}} - 1\right) \\
+  &&= \frac{D_{1}}{\left(1+g\right)} \left(\frac{1}{1 - \left(\frac{1+g}{1+r}\right)} - 1\right) \\
+  &&= \frac{D_{1}}{\left(1+g\right)} \left(\frac{1+r}{r-g} - 1\right) \\
+  &&= \frac{D_{1}}{\left(1+g\right)} \frac{1+g}{r-g} \\
+  &&= \frac{D_{1}}{r-g}
+\end{eqnarray}
 
 \subsubsection*{Part (b)}
 
@@ -110,16 +90,16 @@ Find expression for\dots
 The net present value of this dividend stream can be represented as\dots
 
 \begin{eqnarray}
-  & \sum_{t=1}^{\infty} \frac{D_{0} + tI}{\left(1 + r\right)^{t}} \
-  &= \sum_{t=1}^{\infty} \frac{D_{0}}{\left(1+r\right)^{t}} + \sum_{t=1}^{\infty} \frac{tI}{\left(1+r\right)^{t}} \\
-  &&= D_{0}\left( \sum_{t=0}^{\infty} \frac{1}{\left(1+r\right)^{t}} - 1 \right) + \dots \\
-  &&= D_{0}\left( \frac{1}{1 - \left(\frac{1}{1+r}\right)} -1 \right) + \dots \\
-  &&= D_{0}\left( \frac{r+1}{r} -1 \right) + \dots \\
-  &&= \left( \frac{D_{0}}{r} \right) + \sum_{t=1}^{\infty} \frac{tI}{\left(1+r\right)^{t}} \\
+  & \sum_{t=1}^{\infty} \frac{\left(D_{1} - I\right) + tI}{\left(1 + r\right)^{t}} \
+  &= \sum_{t=1}^{\infty} \frac{\left(D_{1} - I\right)}{\left(1+r\right)^{t}} + \sum_{t=1}^{\infty} \frac{tI}{\left(1+r\right)^{t}} \\
+  &&= \left(D_{1} - I\right)\left( \sum_{t=0}^{\infty} \frac{1}{\left(1+r\right)^{t}} - 1 \right) + \dots \\
+  &&= \left(D_{1} - I\right)\left( \frac{1}{1 - \left(\frac{1}{1+r}\right)} -1 \right) + \dots \\
+  &&= \left(D_{1} - I\right)\left( \frac{r+1}{r} -1 \right) + \dots \\
+  &&= \left( \frac{D_{1} - I}{r} \right) + \sum_{t=1}^{\infty} \frac{tI}{\left(1+r\right)^{t}} \\
   &&= \dots + I\left( \frac{1}{1+r} \left(1 - \frac{1}{1+r}\right)^{-2} \right) \\
   &&= \dots + I\left( \frac{1}{1+r} \left( \frac{1}{1 - \frac{1}{1+r}} \right)^{2} \right) \\
-  &&= \dots + I\left( \frac{1+r}{r^{2}} \right) \\
-  &&= \frac{I + r\left(I + D_{0}\right)}{r^{2}}
+  &&= \left( \frac{D_{1} - I}{r} \right) + I\left( \frac{1+r}{r^{2}} \right) \\[4mm]
+  &&= \frac{rD_{1} + I}{r^{2}}
 \end{eqnarray}
 
 \newpage
