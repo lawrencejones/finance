@@ -232,4 +232,38 @@ From this we can now compute Yield to Maturity\dots
   &&= 8.04\%
 \end{eqnarray}
 
+\newpage
+
+%----------------------------------------------------------------------------------------
+%   EXERCISE 4
+%----------------------------------------------------------------------------------------
+
+\subsection*{Exercise 4. Fixed Income Securities}
+
+Assume a constant ideal bank with yearly interest of 6\%, compounded monthly. Consider an
+annuity that pays £100 monthly over a period of ten years; compute the size of a single cash
+flow arising after five years that is equivalent to the annuity.
+
+\subsubsection*{Part (a)}
+
+We calculate the annuity present value as the sum of all the payments at the discount factor
+for the time they are received\dots
+
+\setcounter{equation}{0}
+\begin{eqnarray}
+  & PV[annuity] &= \sum_{t=1}^{10 \times 12} \frac{100}{\left(1 + \frac{0.06}{12}\right)^{t}} \\[4mm]
+  &&= 100 \left[ \frac{\left(1 - 1.005^{-120}\right)}{1.005\left(1 - 1.005\right)} \right] \\[4mm]
+  &&= £9,007.35
+\end{eqnarray}
+
+A cash flow stream of equivalent value is one that has an equivalent present value. We must find
+the amount ($a$) of the single payment which when discounted for five years of compounded interest
+is equivalent to the present value of the annuity\dots
+
+\begin{eqnarray}
+  & PV[annuity] &= \frac{a}{\left(1 + \frac{0.06}{12}\right)^{5 \times 12}} \\[4mm]
+  & a &= PV[annuity] \times 1.005^{60} \\[4mm]
+      &&= £12,149.57
+\end{eqnarray}
+
 \end{document}
