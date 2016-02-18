@@ -8,7 +8,7 @@ all: $(DOCUMENTS)
 
 %.pdf: %.tex $(RESOURCE_FILES)
 	cp $< libtex/ && cd libtex && ( \
-	  pdflatex -interaction=nonstopmode $< \
+	  pdflatex -interaction=nonstopmode $< | grep -E "^|failed" \
 	) && \
 		mv $@ ../
 
