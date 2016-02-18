@@ -283,4 +283,31 @@ But if we know that $\forall k\in\mathbb{N}:s_{k} = r$, then we can simply this\
   &&= r
 \end{eqnarray}
 
+\subsubsection*{Part (c)}
+
+\textit{A corporation issues a 10\%, 20-year bond at a time when yields are 10\%. The
+bond has a call provision that allows the corporation to force a bond holder to
+redeem his or her bond at face value plus 5\%. After 5 years the corporation
+finds that exercise of this call provision is advantageous.}\\
+
+For calling the bond to be advantageous to the corporation, the money the corporation
+would have to pay ($1.05 \times F$) at the five year mark would have to be worth less
+than the present value of the remaining bond coupon payments plus the final face value
+payment on maturity.
+
+\[ 1.05 \times F < \frac{F}{\left(1+\lambda\right)^{15}} + \frac{cF}{\lambda}\left[1 - \frac{1}{\left(1+\lambda\right)^{15}}\right] \] \\
+
+What is clear from this equation is that the inequality is not affected by the face
+value. This is to be expected, as the answer to whether this is advantageous depends
+fundamentally on the ratio between yield and multiplier of the face value to repay,
+not the size of the face value.
+
+\[ 1.05 < \frac{1}{\left(1+\lambda\right)^{15}} + \frac{c}{\lambda}\left[1 - \frac{1}{\left(1+\lambda\right)^{15}}\right] \] \\
+
+Solving for $\lambda$ would require expanding $(1 + \lambda)^{15}$ which gets
+messy by hand. Using a solver to find the result, we can determine that
+$\lambda = 9.37\%$, a value that is consistent with the expectation that yield
+must have decreased; the cost of supporting the bond had increased beyond the
+cost of recalling it now.
+
 \end{document}
