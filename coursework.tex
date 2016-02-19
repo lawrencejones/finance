@@ -235,6 +235,84 @@ From this we can now compute Yield to Maturity\dots
 \newpage
 
 %----------------------------------------------------------------------------------------
+%   EXERCISE 3
+%----------------------------------------------------------------------------------------
+
+\subsection*{Exercise 3. Portfolio Optimisation}
+
+Consider a market that contains $n$ risky assets and one risk-free asset. Denote by
+$\bar{r}=\left(\bar{r}_{1},\dots,\bar{r}_{n}\right)$ the vector of expected returns and by
+
+\begin{equation*}
+\Sigma = \begin{pmatrix}
+  cov(r_{1},r_{2}) & \dots  & cov(r_{1},r_{n}) \\
+  \vdots           & \ddots & \vdots \\
+  cov(r_{n},r_{1}) & \dots  & cov(r_{n},r_{n})
+\end{pmatrix}
+\end{equation*}
+
+the covariance matric of the risky assets, respectively. Moreover, let $r_{f}$ be the risk-free
+rate of return. Assume that $\Sigma$ is strictly positive definite and therefore invertible.
+
+\subsubsection*{Part (a)}
+
+\textit{What is the expected return $\bar{r}_{P}$ and the variance $\sigma^{2}_{P}$ of a
+  portfolio that assigns weights $\textbf{w} = (w_{i},\dots,w_{n})$ to the risky assets and
+weight $w_{0}$ to the risk-free assets?} \\
+
+Expected return is\dots
+
+\setcounter{equation}{0}
+\begin{eqnarray}
+  & \bar{r}_{P} &= w_{0}r_{f} + E\left[\sum_{i=1}^{n} w_{i}r_{i}\right] \\
+  &&= w_{0}r_{f} + \sum_{i=1}^{n} w_{i} E\left[r_{i}\right] \\
+  &&= w_{0}r_{f} + \sum_{i=1}^{n} w_{i} \bar{r}_{i}
+\end{eqnarray}
+
+Risk free assets have no variance, and so the variance of our portfolio can be expressed
+in terms of our risky weights only\dots
+
+\[ \sigma^{2}_{P} = \sum_{i,j=1}^{n} w_{i}\sigma_{ij}w_{j} \]
+
+\subsubsection*{Part (b)}
+
+\textit{We wish to maximise $\bar{r}_{P} - \frac{a}{2}\sigma^{2}_{P}$, where $a
+> 0$ can be viewed as a risk aversion parameter. Formulate this as a quadratic
+program without constraints.} \\
+
+As $a > 0$, then we know that to maximise this equation we must minimise $\frac{a}{2}\sigma^{2}_{P}$.
+This can be represented as a quadratic program as\dots
+
+\begin{center}
+  \begin{tabular}{ l l r }
+    \textbf{Minimize}   & $\frac{a}{2} \sigma^{2}_{P}$ & \textit{variance} \\[8mm]
+    \textbf{Subject to} & $w_{0}r_{f} + \sum_{i=1}^{n} w_{i}\bar{r}_{i} = \bar{r}_{P}$ & \textit{return} \\[2mm]
+                        & $w_{0} + \sum_{i=1}^{n} w_{i} = 1$ & \textit{budget} \\[4mm]
+  \end{tabular}
+\end{center}
+
+We can reform this as a Lagrangian function in order to remove constraints\dots
+
+\begin{eqnarray}
+  & L(w_{i},\lambda,\mu) &= \frac{a}{2}\sigma^{2}_{P} - \lambda\left(w_{0}r_{f} + \sum_{i=1}^{n} w_{i}\bar{r}_{i} - \bar{r}_{P}\right) - \mu\left(w_{0} + \sum_{i=1}^{n} w_{i} - 1\right) \\
+  &&= \frac{a}{2}\sigma^{2}_{P} - \
+  \lambda\left( \sum_{i=1}^{n}{w_{i}\left(\bar{r}_{i} - r_{f}\right)} + r_{f} - r_{P} \right) - \
+  \mu\left(w_{0} + \sum_{i=1}^{n} w_{i} - 1\right)
+\end{eqnarray}
+
+\subsubsection*{Part (c)}
+
+Differentiating the Lagrangian yields optimality conditions for Part (b)
+
+\begin{eqnarray}
+  & \frac{\delta L}{\delta w_{i}} &: a\sum_{j=1}^{n} \sigma_{ij}w_{i} - \lambda\left(\bar{r}_{i} - r_{f}\right) - \mu = 0 \\
+  & \frac{\delta L}{\delta \lambda} &: \sum_{i=1}^{n}w_{i}\left(\bar{r}_{i} - r_{f}\right) + r_{f} = r_{P} \\
+  & \frac{\delta L}{\delta \mu} &: w_{0} + \sum_{i=1}^{n} w_{i} = 1
+\end{eqnarray}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
 %   EXERCISE 4
 %----------------------------------------------------------------------------------------
 
@@ -309,5 +387,80 @@ messy by hand. Using a solver to find the result, we can determine that
 $\lambda = 9.37\%$, a value that is consistent with the expectation that yield
 must have decreased; the cost of supporting the bond had increased beyond the
 cost of recalling it now.
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+%   EXERCISE 5
+%----------------------------------------------------------------------------------------
+
+\subsection*{Exercise 5. Mean-Variance Portfolio Theory}
+
+\subsubsection*{Part (a)}
+
+The total return of our stock, $R$, is defined as\dots
+
+\[ R_{stock} = \frac{X_{1}}{X_{0}} \]
+
+We can see from this equation that as the sale price $X_{1}$ increases, then so does return.
+The total return on our short can be calculated as the ratio between the money received at
+liquidity and the money invested up front. \\
+
+The initial investment is the deposit of amount $X_{0}$, and then on liquidity we receive
+the difference in sale price $X_{0} - X_{1}$ as our profit and our initial deposit returned.
+
+\setcounter{equation}{0}
+\begin{eqnarray}
+  & R_{short} &= \frac{X_{0} + \left(X_{0} - X_{1}\right)}{X_{0}} \\
+  &&= \frac{2X_{0} - X_{1}}{X_{0}} \\
+  &&= 2 - \frac{X_{1}}{X_{0}} \\
+  &&= 2 - R_{stock}
+\end{eqnarray}
+
+\subsubsection*{Part (b)}
+
+We can compute the variance of a portfolio with
+
+\[ var = \sigma^{2}_{P} = \sum_{i,j=1}^{n} w_{i} \sigma_{ij} w_{j} \] \\
+
+and so with our two stocks, we can compute the variance to be\dots
+
+\begin{eqnarray}
+  & \sigma^{2}_{P} &= \sum_{i,j=1}^{2} w_{i} \sigma_{ij} w_{j} \\
+  &&= w_{1}^{2}\sigma^{2}_{1} + 2w_{1}w_{2}\sigma_{12} + w_{2}^{2}\sigma^{2}_{2}
+\end{eqnarray}\\[1mm]
+\
+We can minimise the variance by expressing this problem as a Lagrangian, with the constraint
+of $\sum_{i=1}^{n} w_{i} = 1$.
+
+\begin{eqnarray}
+  & L(w_{1},w_{2},\lambda) &= w_{1}^{2}\sigma^{2}_{1} + 2w_{1}w_{2}\sigma_{12} + w_{2}^{2}\sigma^{2}_{2} \
+  - \lambda\left(w_{1} + w_{2} - 1\right)
+\end{eqnarray}
+
+We can now establish the optimality conditions by differentiating the Lagrange\dots
+
+\begin{eqnarray}
+  & \frac{\delta L}{\delta w_{1}} &: 2w_{1}\sigma^{2}_{1} + 2w_{2}\sigma_{12} - \lambda = 0 \label{eq:5b1}\\
+  & \frac{\delta L}{\delta w_{2}} &: 2w_{2}\sigma^{2}_{2} + 2w_{1}\sigma_{12} - \lambda = 0 \label{eq:5b2}\\
+  & \frac{\delta L}{\delta \lambda} &: w_{1} + w_{2} = 1
+\end{eqnarray}
+
+Calculating $\left(\ref{eq:5b1}\right) - \left(\ref{eq:5b2}\right)$ gives\dots
+
+\begin{eqnarray}
+  & 0 &= 2w_{1}\sigma^{2}_{1} + 2w_{2}\sigma_{12} - 2w_{2}\sigma^{2}_{2} - 2w_{1}\sigma_{12} \\
+  &&= w_{1}\sigma^{2}_{1} + \left(1-w_{1}\right)\sigma_{12} - \left(1-w_{1}\right)\sigma_{2}^{2} - w_{1}\sigma_{12} \\
+  &&= w_{1}\left(\sigma^{2}_{1} - 2\sigma_{12} + \sigma^{2}_{2}\right) - \sigma^{2}_{2} + \sigma_{12} \\
+  & w_{1} &= \frac{\sigma^{2}_{2} - \sigma_{12}}{\sigma^{2}_{1} - 2\sigma_{12} + \sigma^{2}_{2}}
+\end{eqnarray}\\[1mm]
+\
+Similarly, $w_{2}$ can be computed as\dots
+
+\[ w_{2} = \frac{\sigma^{2}_{1} - \sigma_{12}}{\sigma^{2}_{1} - 2\sigma_{12} + \sigma^{2}_{2}} \] \\
+
+The mean rate of return can be defined in terms of $w_{1}$ and $w_{2}$\dots
+
+\[ \bar{r} = w_{1}\bar{r}_{1} + w_{2}\bar{r}_{2} \]
 
 \end{document}
